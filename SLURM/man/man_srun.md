@@ -1,6 +1,16 @@
 # srun
 Run parallel jobs
 
+## description
+Run a parallel job on cluster managed by Slurm.  If necessary, srun will first create a resource allocation in which to run the parallel job.
+The following document describes the influence of various options on the allocation of cpus to jobs and tasks.
+https://slurm.schedmd.com/cpu_management.html
+
+## return value
+srun  will return the highest exit code of all tasks run or the highest signal (with the high-order bit set in an 8-bit integer -- e.g. 128 + signal) of any task that exited with a signal.
+The value 253 is reserved for out-of-memory errors.
+
+
 ## usage
 srun [OPTIONS(0)... [executable(0) [args(0)...]]] [ : [OPTIONS(N)...]] executable(N) [args(N)...]
 
@@ -99,57 +109,44 @@ short | long | description
 ## (consumable resources related) options
 short | long | description
 --- | ------------------------- | ---
---exact                 use only the resources requested for the step
-                        (by default, all non-gres resources on each node
-                        in the allocation will be used in the step)
---exclusive[=user]      for job allocation, this allocates nodes in
-                        in exclusive mode
-                        for job steps, this is equivalent to --exact
---exclusive[=mcs]       allocate nodes in exclusive mode when
-                        cpu consumable resource is enabled
-                        and mcs plugin is enabled (--exact implied)
-                        or don't share CPUs for job steps
---mem-per-cpu=MB        maximum amount of real memory per allocated
-                        cpu required by the job.
-                        --mem >= --mem-per-cpu if --mem is specified.
---resv-ports            reserve communication ports
+    | --exact                   | use only the resources requested for the step (by default, all non-gres resources on each node in the allocation will be used in the step)
+    | --exclusive[=user]        | for job allocation, this allocates nodes in in exclusive mode for job steps, this is equivalent to --exact
+    | --exclusive[=mcs]         | allocate nodes in exclusive mode when cpu consumable resource is enabled and mcs plugin is enabled (--exact implied) or don't share CPUs for job steps
+    | --mem-per-cpu=MB          | maximum amount of real memory per allocated cpu required by the job.
+    | --mem                     | >= --mem-per-cpu if --mem is specified.
+    | --resv-ports              | reserve communication ports
 
 
 ## (affinity / Multi-core) options
 short | long | description
---- | ------------------------- | ---
--B, --extra-node-info=S[:C[:T]]           Expands to:
-    --sockets-per-node=S    number of sockets per node to allocate
-    --cores-per-socket=C    number of cores per socket to allocate
-    --threads-per-core=T    number of threads per core to allocate
-                            each field can be 'min' or wildcard '*'
-                            total cpus requested = (N x S x C x T)
-
-    --ntasks-per-core=n     number of tasks to invoke on each core
-    --ntasks-per-socket=n   number of tasks to invoke on each socket
-    --cpu-bind=             Bind tasks to CPUs
-                            (see "--cpu-bind=help" for options)
-    --hint=                 Bind tasks according to application hints
-                            (see "--hint=help" for options)
+--- | ----------------------------- | ---
+-B  | --extra-node-info=S[:C[:T]]   |           Expands to:
+    | --sockets-per-node=S          | number of sockets per node to allocate
+    | --cores-per-socket=C          | number of cores per socket to allocate
+    | --threads-per-core=T          | number of threads per core to allocate each field can be 'min' or wildcard '*' total cpus requested = (N x S x C x T)
+    | --ntasks-per-core=n           | number of tasks to invoke on each core
+    | --ntasks-per-socket=n         | number of tasks to invoke on each socket
+    | --cpu-bind=                   | Bind tasks to CPUs (see "--cpu-bind=help" for options)
+    | --hint=                       | Bind tasks according to application hints (see "--hint=help" for options)
 
 
 ## options (provided by plugins)
 short | long | description
---- | ------------------------- | ---
---auks=[yes|no|done]    kerberos credential forwarding using Auks
+--- | --------------------------- | ---
+    | --auks=[yes\|no\|done]      | kerberos credential forwarding using Auks
 
 
 ## (GPU scheduling) options
 short | long | description
 --- | ------------------------- | ---
---cpus-per-gpu=n        number of CPUs required per allocated GPU
--G, --gpus=n                count of GPUs required for the job
---gpu-bind=...          task to gpu binding options
---gpu-freq=...          frequency and voltage of GPUs
---gpus-per-node=n       number of GPUs required per allocated node
---gpus-per-socket=n     number of GPUs required per allocated socket
---gpus-per-task=n       number of GPUs required per spawned task
---mem-per-gpu=n         real memory required per allocated GPU
+    | --cpus-per-gpu=n          | number of CPUs required per allocated GPU
+-G  | --gpus=n                  | count of GPUs required for the job
+    | --gpu-bind=...            | task to gpu binding options
+    | --gpu-freq=...            | frequency and voltage of GPUs
+    | --gpus-per-node=n         | number of GPUs required per allocated node
+    | --gpus-per-socket=n       | number of GPUs required per allocated socket
+    | --gpus-per-task=n         | number of GPUs required per spawned task
+    | --mem-per-gpu=n           | real memory required per allocated GPU
 
 ## (help) options
 short | long | description
