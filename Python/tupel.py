@@ -1,18 +1,29 @@
-my_info = ("Jörg", 37, "Programmer")
-print(my_info)
-print(my_info[1])
+my_info = ("Joerg", 37, "Programmer")
+print("tupel is ", my_info)
+print("second element of tupel is: ", my_info[1])
 name, age, occupation = my_info
-print(name)
-print(age)
-print(occupation)
+print("after unpacking the tupel: ")
+print("\tname =", name)
+print("\tage =", age)
+print("\toccupation =", occupation)
 one_element_tuple = (4,)
-print(one_element_tuple)
+print("one_element_tuple: ",one_element_tuple)
 
 list_1 = [1, 2, 3, 4]
 list_2 = [4, 3, 2, 1]
 tup = zip(list_1, list_2)
-print(tup)
-list_3 = [list(entry) for entry in tup]
-print(list_3)
+print("after zipping two lists: ", tup)
+list_3 = tuple(entry for entry in tup)
+print("after casting: ", list_3)
 
-my_info[1] = 27
+try:
+    my_info[1] = 27
+except TypeError as e:
+    print("a tuple is UNCHANGEABLE")
+    print("ERROR message is: ", e)
+
+d = dir(tuple)
+print("Tuple methods are: ")
+for entry in d:
+    if not entry.startswith("__"):
+        print("\t",entry)
