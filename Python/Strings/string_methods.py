@@ -44,8 +44,8 @@ for i in range(len(d)):
         if d[i] in o:
             x = o.get(d[i])
             for y in x:
-                print(f"\n{count} -> {d[i]}", end=" ")
+                print(f"\n{count:>2} -> {d[i]:>18}", end=" ")
                 print(f"-> |{y}|", end="")
         else:
-            print(f"\n{count} -> {d[i]}", end=" ")
+            print(f"\n{count:>2} -> {d[i]:>18}", end=" ")
         

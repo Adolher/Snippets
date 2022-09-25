@@ -1,3 +1,4 @@
 {
-    "code-runner.clearPreviousOutput": true
+    "code-runner.clearPreviousOutput": true,
+    "workbench.settings.useSplitJSON": false
 }
