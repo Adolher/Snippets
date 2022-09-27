@@ -8,16 +8,10 @@ def func_2(s):
     print(f"{s} in the function")
 
 
-
-
-
-
-
 func()
+print(func_with_return())
 func_2("I am")
 
-
-print(func_with_return())
 
 
 def f1(*args):
