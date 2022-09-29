@@ -43,4 +43,10 @@ ___
 | (4) | git commit -a | commit changes to staging area (without new files) |
 | 6 | git push -u origin main | move changes to remote repository |
 
+## .gitignore
+| step | command | description |
+| --- | --- | --- |
+|  | git rm --cached \<filename> | untrack a file that is already checked in |
+|  | echo "\<filename> >> .gitignore | append \<filename> to .gitignore |
+
 ## branch a repository
