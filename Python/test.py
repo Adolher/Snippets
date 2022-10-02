@@ -1,4 +1,5 @@
-def func():
-    a = [1, 4]
-
-print(a[0])
+try:
+    print("Hallo")
+    raise Exception
+finally:
+    print("finally")
