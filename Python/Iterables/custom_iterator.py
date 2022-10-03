@@ -2,6 +2,7 @@ class CustomerCounter:
   def __iter__(self):
     self.count = 0
     return self
+    
   def __next__(self):
     self.count += 1
     if self.count > 100:
